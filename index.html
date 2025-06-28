@@ -521,14 +521,14 @@ function enviarRespuestasAGoogleForms() {
 
   // El resto son respuestas recogidas en el array `respuestas`
   campos.slice(3).forEach(c => {
-    const val = respuestas[c.index] || '';
+    const val = respuestas[c.index + 3] || '';
     params.push(`${c.entry}=${encodeURIComponent(val)}`);
   });
 
   const finalURL = baseURL + params.join('&');
 
   // Enviar automáticamente
-  fetch(finalURL, { method: 'POST', mode: 'no-cors' });
+  window.open(finalURL, '_blank');
 
   // También puedes abrir el formulario en una pestaña si deseas:
   // window.open(finalURL, '_blank');
