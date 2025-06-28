@@ -528,7 +528,7 @@ function enviarRespuestasAGoogleForms() {
   const finalURL = baseURL + params.join('&');
 
   // Enviar automáticamente
-  window.open(finalURL, '_blank');
+  fetch(finalURL, { method: 'POST', mode: 'no-cors' });
 
   // También puedes abrir el formulario en una pestaña si deseas:
   // window.open(finalURL, '_blank');
