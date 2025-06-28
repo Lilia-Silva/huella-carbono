@@ -420,6 +420,7 @@ const toneladas = huellaCO2.toFixed(2);
 
   box.style.color = color;
   box.style.borderColor = color;
+  enviarRespuestasAGoogleForms();
 }
 
 
@@ -464,6 +465,74 @@ resetBtn.addEventListener('click', () => {
 });
 </script>
 
+
+
+
+
+
+
+
+
+
+<script>
+function enviarRespuestasAGoogleForms() {
+  const baseURL = 'https://docs.google.com/forms/d/e/1FAIpQLSfXXKfD7uspbImz6J2fj_Bsad9GtSOPAKNWeeEhY-4ENLV3Uw/formResponse?';
+
+  const campos = [
+    { id: 'nombre', entry: 'entry.2093582806' },
+    { id: 'edad', entry: 'entry.1653009733' },
+    { id: 'genero', entry: 'entry.386576826' },
+    // Las siguientes respuestas se guardan automáticamente en el array `respuestas` de tu código:
+    // Solo se necesita emparejar en orden correcto con los campos del formulario.
+    { index: 0, entry: 'entry.379093333' },  // km por semana
+    { index: 1, entry: 'entry.799998647' },  // tipo de vehículo
+    { index: 2, entry: 'entry.1857571697' }, // transporte público
+    { index: 3, entry: 'entry.545336758' },  // avión
+    { index: 4, entry: 'entry.93936452' },   // electricidad
+    { index: 5, entry: 'entry.692394519' },  // aire acondicionado
+    { index: 6, entry: 'entry.1972239541' }, // bombillos
+    { index: 7, entry: 'entry.1582198550' }, // paneles solares
+    { index: 8, entry: 'entry.147997484' },  // carne roja
+    { index: 9, entry: 'entry.1131053161' }, // lácteos
+    { index: 10, entry: 'entry.1328763228' },// alimentos locales
+    { index: 11, entry: 'entry.2099695558' },// comer fuera
+    { index: 12, entry: 'entry.346322075' }, // ropa
+    { index: 13, entry: 'entry.505921819' }, // segunda mano
+    { index: 14, entry: 'entry.855045972' }, // electrónicos
+    { index: 15, entry: 'entry.183845306' }, // plástico
+    { index: 16, entry: 'entry.1709363844' },// reciclaje
+    { index: 17, entry: 'entry.860506442' }, // compost
+    { index: 18, entry: 'entry.2033621690' },// centro reciclaje
+    { index: 19, entry: 'entry.2041279415' },// reutilización
+    { index: 20, entry: 'entry.915490698' }, // trabajo casa
+    { index: 21, entry: 'entry.1268953540' },// iniciativas ecológicas
+    { index: 22, entry: 'entry.2121608794' },// ahorro agua
+    { index: 23, entry: 'entry.1037536391' } // apaga luces
+  ];
+
+  let params = [];
+
+  // Primeros 3 campos vienen de los inputs iniciales
+  campos.slice(0, 3).forEach(c => {
+    const val = document.getElementById(c.id)?.value || '';
+    params.push(`${c.entry}=${encodeURIComponent(val)}`);
+  });
+
+  // El resto son respuestas recogidas en el array `respuestas`
+  campos.slice(3).forEach(c => {
+    const val = respuestas[c.index] || '';
+    params.push(`${c.entry}=${encodeURIComponent(val)}`);
+  });
+
+  const finalURL = baseURL + params.join('&');
+
+  // Enviar automáticamente
+  fetch(finalURL, { method: 'POST', mode: 'no-cors' });
+
+  // También puedes abrir el formulario en una pestaña si deseas:
+  // window.open(finalURL, '_blank');
+}
+</script>
 
 
 </body>
